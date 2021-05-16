@@ -182,13 +182,7 @@ average_rh_age =  np.nansum(ages*np.array(right_handed_probability))
 ... 67.2
 >>> print(round(average_rh_age,1))
 ... 72.8
->>> print("The difference in avera
->>> 
->>> 
->>> 
->>> 
->>> 
->>> ge ages is " + str(round(average_rh_age - average_lh_age, 1)) + " years.")
+>>> print("The difference in average ages is " + str(round(average_rh_age - average_lh_age, 1)) + " years.")
 ... The difference in average ages is 5.5 years.
 ```
 <h3>10. Final comments</h3>
