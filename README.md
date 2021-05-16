@@ -99,6 +99,6 @@ ax.plot(death_distribution_data['Age'], death_distribution_data['Both Sexes']) #
 plt.show()
 ```
 
-<img src='datasets/img3.jpg'>
+<img src='datasets/img33.jpg'>
 
 <h3>5. The overall probability of left-handedness <code>P(LH)</code></h3>
