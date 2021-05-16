@@ -164,6 +164,6 @@ ax.plot(ages, right_handed_probability, label = "Right-handed")
 
 plt.show()
 ```
-<img src='datasets/img3.jpg>
+<img src='datasets/img4.jpg'>
 
 <p>Notice that the left-handed distribution has a bump below age 70: of the pool of deceased people, left-handed people are more likely to be younger. </p>
