@@ -148,3 +148,22 @@ def P_A_given_rh(ages_of_death, death_distribution_data, study_year = 1990):
     P_rh_A = 1-P_lh_given_A(ages_of_death, study_year) # these also sum to 1 
     return P_rh_A*P_A/P_right
 ```
+
+<h3>8. Plotting the distributions of conditional probabilities</h3>
+<p>Let's plot these probabilities for a range of ages of death from 6 to 120.</p>
+
+```python
+ages = np.arange(6,115,1)
+
+left_handed_probability = P_A_given_lh(ages, death_distribution_data)
+right_handed_probability = P_A_given_rh(ages, death_distribution_data)
+
+fig, ax = plt.subplots() # create figure and axis objects
+ax.plot(ages, left_handed_probability, label = "Left-handed")
+ax.plot(ages, right_handed_probability, label = "Right-handed")
+
+plt.show()
+```
+<img src='datasets/img3.jpg>
+
+<p>Notice that the left-handed distribution has a bump below age 70: of the pool of deceased people, left-handed people are more likely to be younger. </p>
