@@ -1,7 +1,7 @@
-![Forks](https://img.shields.io/github/forks/shukkkur/Do-Left-Handed-People-Die-Young-.svg)
-![Stars](https://img.shields.io/github/stars/shukkkur/Do-Left-Handed-People-Die-Young-.svg)
-![Watchers](https://img.shields.io/github/watchers/shukkkur/Do-Left-Handed-People-Die-Young-.svg)
-![Last Commit](https://img.shields.io/github/last-commit/shukkkur/Do-Left-Handed-People-Die-Young-.svg) 
+![Forks](https://img.shields.io/github/forks/shukkkur/Do-Left-Handed-People-Die-Young.svg)
+![Stars](https://img.shields.io/github/stars/shukkkur/Do-Left-Handed-People-Die-Young.svg)
+![Watchers](https://img.shields.io/github/watchers/shukkkur/Do-Left-Handed-People-Die-Young.svg)
+![Last Commit](https://img.shields.io/github/last-commit/shukkkur/Do-Left-Handed-People-Die-Young.svg) 
 
 <h2 align='center'>Do Left-handed People Really Die Young?</h2>
 
@@ -51,3 +51,36 @@ plt.show()
 <p align='center'>
   <img src='datasets/formula1.jpg'>
 </p>
+
+<ul>
+  <li><code>P(LH | A)</code> the probability that you are left-handed given that you died at age <code>A</code></li>
+  <li><code>P(A)</code> overall probability of dying at age <code>A</code></li>
+  <li><code>P(LH)</code> overall probability of being left-handed</li>
+</ul>
+
+<p>To calculate <code>P(LH | A)</code> for ages that might fall outside the original data, we will need to extrapolate the data to earlier and later years.</p>
+
+```python
+def P_lh_given_A(ages_of_death, study_year = 1990):
+    """ P(Left-handed | age of death), calculated based on the reported rates of left-handedness.
+    Inputs: age of death, study_year
+    Returns: probability of left-handedness given that a subject died in `study_year` at age `age_of_death` """
+    
+    # Use the mean of the 10 neighbouring points for rates before and after the start 
+    early_1900s_rate = lefthanded_data['Mean_lh'][-10:].mean()
+    late_1900s_rate = lefthanded_data['Mean_lh'][:10].mean()
+    middle_rates = lefthanded_data.loc[lefthanded_data['Birth_year'].isin(study_year - ages_of_death)]['Mean_lh']
+    
+    youngest_age = study_year - 1986 + 10 # the youngest age in the NatGeo dataset is 10
+    oldest_age = study_year - 1986 + 86 # the oldest age in the NatGeo dataset is 86
+    
+    P_return = np.zeros(ages_of_death.shape)  # create an empty array to store the results
+    # extract rate of left-handedness for people of age age_of_death
+    P_return[ages_of_death > oldest_age] = early_1900s_rate / 100
+    P_return[ages_of_death < youngest_age] = late_1900s_rate / 100
+    P_return[np.logical_and((ages_of_death <= oldest_age), (ages_of_death >= youngest_age))] = middle_rates / 100
+ 
+    return P_return
+```
+
+<h3>4. When do people normally die?</h3>
