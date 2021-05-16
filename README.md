@@ -83,8 +83,8 @@ def P_lh_given_A(ages_of_death, study_year = 1990):
     return P_return
 ```
 
-<h3>4. When do people normally die?</h3>
-<p>To estimate the probability of living to an age A, we can use data that gives the number of people who died in a given year and how old they were to create a distribution of ages of death.</p>
+<h3>4. When do people normally die? <code>P(A)</code></h3>
+<p>To estimate the probability of living to an age <code>A</code>, we can use data that gives the number of people who died in a given year and how old they were to create a distribution of ages of death.</p>
 
 ```python
 # Death distribution data for the United States in 1999
@@ -100,3 +100,5 @@ plt.show()
 ```
 
 <img src='datasets/img3.jpg'>
+
+<h3>5. The overall probability of left-handedness <code>P(LH)</code></h3>
