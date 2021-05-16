@@ -102,3 +102,28 @@ plt.show()
 <img src='datasets/img33.jpg'>
 
 <h3>5. The overall probability of left-handedness <code>P(LH)</code></h3>
+<p><code>P(LH)</code> is the probability that a person who died in our particular study year is left-handed. We can calculate it by summing up all of the left-handedness probabilities for each age, weighted with the number of deceased people at each age, then divided by the total number of deceased people to get a probability.</p>
+<p align='center'>
+  <img src='datasets/formula.jpg'>
+</p>
+
+<ul>
+  <li><code>N(A)</code> is the number of people who died at age A</li>
+</ul>
+
+```python
+def P_lh(death_distribution_data, study_year = 1990): # sum over P_lh for each age group
+    """ Overall probability of being left-handed if you died in the study year
+    P_lh = P(LH | Age of death) P(Age of death) + P(LH | not A) P(not A) = sum over ages 
+    Input: dataframe of death distribution data
+    Output: P(LH), a single floating point number """
+    p_list = death_distribution_data['Both Sexes']*P_lh_given_A(death_distribution_data['Age'], study_year)
+    p = np.sum(p_list)
+    return p/np.sum(death_distribution_data['Both Sexes']) # normalize to total number of people in distribution
+
+>>> P_lh(death_distribution_data)
+... 0.07766387615350638
+```
+
+<h3>6. Putting it all together: dying while left-handed (i)</h3>
+<p>Now we have the means of calculating all three quantities we need: <code>P(A), P(LH), and P(LH | A)</code></p>
