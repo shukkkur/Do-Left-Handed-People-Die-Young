@@ -84,3 +84,19 @@ def P_lh_given_A(ages_of_death, study_year = 1990):
 ```
 
 <h3>4. When do people normally die?</h3>
+<p>To estimate the probability of living to an age A, we can use data that gives the number of people who died in a given year and how old they were to create a distribution of ages of death.</p>
+
+```python
+# Death distribution data for the United States in 1999
+data_url_2 = "https://gist.githubusercontent.com/mbonsma/2f4076aab6820ca1807f4e29f75f18ec/raw/62f3ec07514c7e31f5979beeca86f19991540796/cdc_vs00199_table310.tsv"
+death_distribution_data = pd.read_csv(data_url_2, sep='\t', skiprows=[1])
+
+death_distribution_data = death_distribution_data.dropna(subset=['Both Sexes'])
+
+fig, ax = plt.subplots()
+ax.plot(death_distribution_data['Age'], death_distribution_data['Both Sexes']) # plot 'Both Sexes' vs. 'Age'
+
+plt.show()
+```
+
+<img src='datasets/img3.jpg'>
