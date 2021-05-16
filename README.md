@@ -167,3 +167,40 @@ plt.show()
 <img src='datasets/img4.jpg'>
 
 <p>Notice that the left-handed distribution has a bump below age 70: of the pool of deceased people, left-handed people are more likely to be younger. </p>
+
+<h3>9. Moment of truth: age of left and right-handers at death</h3>
+<p>Finally, let's compare our results with the original study that found that left-handed people were nine years younger at death on average. We can do this by calculating the mean of these probability distributions in the same way we calculated <code>P(LH)</code> earlier, weighting the probability distribution by age and summing over the result.</p>
+
+<img src='datasets/formula4.jpg'>
+
+```python
+average_lh_age =  np.nansum(ages*np.array(left_handed_probability))
+average_rh_age =  np.nansum(ages*np.array(right_handed_probability))
+
+
+>>> print(round(average_lh_age,1))
+... 67.2
+>>> print(round(average_rh_age,1))
+... 72.8
+>>> print("The difference in avera
+>>> 
+>>> 
+>>> 
+>>> 
+>>> 
+>>> ge ages is " + str(round(average_rh_age - average_lh_age, 1)) + " years.")
+... The difference in average ages is 5.5 years.
+```
+<h3>10. Final comments</h3>
+<p>We got a pretty big age gap between left-handed and right-handed people purely as a result of the changing rates of left-handedness in the population.<br>To finish off, let's calculate the age gap we'd expect if we did the study in 2021 instead of in 1990.</p>
+
+```python
+left_handed_probability_2021 = P_A_given_lh(ages, death_distribution_data, study_year = 2021)
+right_handed_probability_2021 = P_A_given_rh(ages, death_distribution_data, study_year = 2021)
+    
+average_lh_age_2021 =  np.nansum(ages*np.array(left_handed_probability_2021))
+average_rh_age_2021 =  np.nansum(ages*np.array(right_handed_probability_2021))
+
+>>> print("The difference in average ages is " + str(round(average_rh_age_2021 - average_lh_age_2021, 1)) + " years.")
+... The difference in average ages is 1.9 years.
+```
