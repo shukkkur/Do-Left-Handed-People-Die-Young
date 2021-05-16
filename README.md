@@ -126,4 +126,25 @@ def P_lh(death_distribution_data, study_year = 1990): # sum over P_lh for each a
 ```
 
 <h3>6. Putting it all together: dying while left-handed (i)</h3>
-<p>Now we have the means of calculating all three quantities we need: <code>P(A), P(LH), and P(LH | A)</code></p>
+<p>Now we have the means of calculating all three quantities we need: <code>P(A)</code>, <code>P(LH)</code> and <code>P(LH | A)</code><br>We can combine all three using Bayes' rule to get <code>P(A | LH)</code><br>.</p>
+
+<p>For left-handers, </p>
+
+```python
+def P_A_given_lh(ages_of_death, death_distribution_data, study_year = 1990):
+    """ The overall probability of being a particular `age_of_death` given that you're left-handed """
+    P_A = death_distribution_data['Both Sexes'][ages_of_death] / np.sum(death_distribution_data['Both Sexes'])
+    P_left = P_lh(death_distribution_data, study_year) # use P_lh function to get probability of left-handedness overall
+    P_lh_A = P_lh_given_A(ages_of_death, study_year) # use P_lh_given_A to get probability of left-handedness for a certain age
+    return P_lh_A*P_A/P_left
+```
+<p>And for right-handers, </p>
+
+```python
+def P_A_given_rh(ages_of_death, death_distribution_data, study_year = 1990):
+    """ The overall probability of being a particular `age_of_death` given that you're right-handed """
+    P_A = death_distribution_data['Both Sexes'][ages_of_death] / np.sum(death_distribution_data['Both Sexes'])
+    P_right = 1- P_lh(death_distribution_data, study_year) # either you're left-handed or right-handed, so these sum to 1
+    P_rh_A = 1-P_lh_given_A(ages_of_death, study_year) # these also sum to 1 
+    return P_rh_A*P_A/P_right
+```
